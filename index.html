@@ -128,9 +128,10 @@
     <div class="errore" id="errore"></div>
     <details id="privacy">
       <summary>Come vengono trattati i tuoi dati</summary>
-      <p>La tua email serve a mandarti la mappa dei rintocchi e, se hai spuntato la seconda casella, ad avvisarti quando esce un nuovo libro. Nient'altro.</p>
-      <p>I dati sono conservati in un foglio privato e non vengono ceduti, venduti o condivisi con terzi. Non c'è pubblicità, non c'è profilazione, non ci sono cookie di tracciamento su questa pagina.</p>
-      <p>Puoi chiedere in qualsiasi momento di essere cancellato rispondendo a una qualunque email che ricevi: la riga viene eliminata e non ricevi più nulla.</p>
+      <p><strong>Titolare del trattamento:</strong> Andolfi Silvio, contattabile all'indirizzo <a href="mailto:nontuttovaaggiustato@gmail.com">nontuttovaaggiustato@gmail.com</a>.</p>
+      <p>La tua email, le risposte e la mappa risultante servono a consegnarti il percorso richiesto. Se selezioni anche la seconda casella, l'email viene usata per avvisarti dell'uscita di nuovi libri.</p>
+      <p>I dati collegati alla consegna della mappa vengono cancellati o anonimizzati entro 30 giorni. L'email usata per le novità viene conservata fino alla revoca del consenso e comunque sottoposta a verifica entro 24 mesi.</p>
+      <p>Puoi chiedere accesso, correzione, cancellazione o revocare il consenso scrivendo all'indirizzo indicato. Leggi l'<a href="privacy.html" target="_blank" rel="noopener">informativa privacy completa</a>.</p>
     </details>
   </section>
 
@@ -161,7 +162,7 @@ const SOCIAL = {
   tiktok:    "https://www.tiktok.com/@nontuttovaaggiustato",
   facebook:  "https://www.facebook.com/nontuttovaaggiustato"
 };
-/* ═════════════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════════════ */
 
 const FAMIGLIE = {
   C:{nome:"Quello che non puoi controllare", apertura:"Stai spendendo molto per tenere fermo qualcosa che non sta fermo."},
@@ -212,7 +213,7 @@ const DOMANDE = [
     {t:"Lascio le cose esattamente come stavano", p:{P:2}, r:2},
     {t:"Rimando: lo farò quando sarà il momento", p:{A:2}, r:104}
   ]},
-  { d:"Che cosa ti farebbe bene, adesso?", o:[
+  { d:"Che cosa ti farebbe bene, adesso/", o:[
     {t:"Smettere di sentirmi in colpa", p:{T:1,A:1}},
     {t:"Riuscire a dire una cosa che non ho detto", p:{R:1,C:1}},
     {t:"Ricordare senza che faccia così male", p:{P:1}},
@@ -222,7 +223,7 @@ const DOMANDE = [
     {t:"È successo da poco", p:{}, v:"poco"},
     {t:"Qualche mese", p:{}, v:"mesi"},
     {t:"Più di un anno", p:{}, v:"anno"},
-    {t:"Da sempre, mi sembra", p:{}, v:"sempre"}
+   {t:"Da sempre, mi sembra", p:{}, v:"sempre"}
   ]}
 ];
 
@@ -248,7 +249,7 @@ function disegnaDomanda(){
   document.getElementById('passo').textContent = "Domanda " + (indice+1) + " di " + DOMANDE.length;
   document.getElementById('avanzamento').style.width = ((indice)/DOMANDE.length*100) + "%";
   document.getElementById('testo-domanda').textContent = q.d;
-  const box = document.getElementById('opzioni');
+  const box = document.getElentById('opzioni');
   box.innerHTML = "";
   q.o.forEach((op, i) => {
     const b = document.createElement('button');
@@ -306,7 +307,7 @@ function invia(){
     err.style.display = 'block'; return;
   }
 
-  const bottone = document.getElementById('invia');
+  const bottone = document.getElentById('invia');
   bottone.disabled = true; bottone.textContent = "Un momento…";
 
   const m = costruisciMappa();
@@ -351,7 +352,7 @@ function disegnaMappa(m, conEmail){
 
 function disegnaSocial(){
   const icone = {
-    instagram:'<path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c0 1.2-.2 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2 0-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c0-1.2.2-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.07-1.1.05-1.7.24-2.1.4-.5.2-.9.44-1.3.84-.4.4-.64.8-.84 1.3-.16.4-.35 1-.4 2.1C2.6 9.9 2.6 10.3 2.6 12s0 2.1.06 3.3c.05 1.1.24 1.7.4 2.1.2.5.44.9.84 1.3.4.4.8.64 1.3.84.4.16 1 .35 2.1.4 1.2.06 1.6.06 4.7.06s3.5 0 4.7-.06c1.1-.05 1.7-.24 2.1-.4.5-.2.9-.44 1.3-.84.4-.4.64-.8.84-1.3.16-.4.35-1 .4-2.1.06-1.2.06-1.6.06-3.3s0-2.1-.06-3.3c-.05-1.1-.24-1.7-.4-2.1-.2-.5-.44-.9-.84-1.3-.4-.4-.8-.64-1.3-.84-.4-.16-1-.35-2.1-.4C15.5 4 15.1 4 12 4zm0 3.1a4.9 4.9 0 110 9.8 4.9 4.9 0 010-9.8zm0 8a3.1 3.1 0 100-6.2 3.1 3.1 0 000 6.2zm6.2-8.2a1.15 1.15 0 11-2.3 0 1.15 1.15 0 012.3 0z"/>',
+    instagram:'<path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s-.1 3.6-.1 4.9c0 1.2-.2 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2 0-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c0-1.2.2-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.07-1.1.05-1.7.24-2.1.4-.5.2-.9.44-1.3.84-.4.4-.64.8-.84 1.3-.16.4-.35 1-.4 2.1C2.6 9.9 2.6 10.3 2.6 12s0 2.1.06 3.3c.05 1.1.24 1.7.4 2.1.2.5.44.9.84 1.3.4.4.8.64 1.3.84.4.16 1 .35 2.1.4 1.2.06 1.6.06 4.7.06s3.5 0 4.7-.06c1.1-.05 1.7-.24 2.1-.4.5-.2.9-.44 1.3-.84.4-.4.64-.8.84-1.3.16-.4.35-1 .4-2.1.06-1.2.06-1.6.06-3.3s0-2.1-.06-3.3c-.05-1.1-.24-1.7-.4-2.1-.2-.5-.44-.9-.84-1.3-.4-.4-.8-.64-1.3-.84-.4-.16-1-.35-2.1-.4C15.5 4 15.1 4 12 4zm0 3.1a4.9 4.9 0 110 9.8 4.9 4.9 0 010-9.8zm0 8a3.1 3.1 0 100-6.2 3.1 3.1 0 000 6.2zm6.2-8.2a1.15 1.15 0 11-2.3 0 1.15 1.15 0 012.3 0z"/>',
     tiktok:'<path d="M16.6 5.8a4.8 4.8 0 01-1.1-3.1h-3.1v12.6a2.7 2.7 0 11-2.7-2.7c.28 0 .55.04.8.12v-3.2a6 6 0 00-.8-.06 5.9 5.9 0 105.9 5.9V9.6a7.9 7.9 0 004.6 1.5V8a4.7 4.7 0 01-3.6-2.2z"/>',
     facebook:'<path d="M22 12a10 10 0 10-11.6 9.9v-7h-2.5V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0022 12z"/>'
   };
